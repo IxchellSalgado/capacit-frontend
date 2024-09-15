@@ -14,8 +14,8 @@
         <!-- Aqui se recorren los clientes y se enlistan en la tabla-->
         <tr *ngFor="let orderItem of orderitems"> <!-- Correcto, 'orderitems' en minúsculas -->
             <td>{{orderItem.id}}</td>
-            <td>{{orderItem.Pedido}}</td>
-            <td>{{orderItem.Producto}}</td>
+            <td>{{orderItem.nombrePedido}}</td>
+            <td>{{orderItem.nombreProducto}}</td>
             <td>${{orderItem.precio}}</td>
             <td>{{orderItem.quantity}}</td>
             <!--<td>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderItems } from 'src/app/models/order-items/order-items';
 import { OrderItemsService } from 'src/app/servicios/order-items/order-items.service';
-import { Router } from '@angular/router';
-
+import { RequestOrderItemsDTO } from '../../models/order-items/request-order-items-dto';
+import { ResponseOrderItemsDTO } from '../../models/order-items/response-order-items-dto';
 
 @Component({
   selector: 'app-order-items',
@@ -11,18 +10,21 @@ import { Router } from '@angular/router';
 })
 export class OrderItemsComponent implements OnInit {
 
-  orderitems : OrderItems[];
+  orderitems: ResponseOrderItemsDTO[] = []; 
+  filtro: RequestOrderItemsDTO;
 
-  constructor(private orderItemsService :OrderItemsService, private router: Router) { }
+  constructor(private orderItemsService: OrderItemsService) { }
 
   ngOnInit(): void {
-    this.listarOrderItems();
+    this.filtro = new RequestOrderItemsDTO();  // Inicializa el filtro
+    this.listarOrderItems();  // Llama al método al inicializar el componente
   }
+  
 
-  listarOrderItems() {
-    this.orderItemsService.listarOrderItems().subscribe(dato => {
-      this.orderitems = dato;
-      console.log(dato);
+  listarOrderItems(): void {
+    this.orderItemsService.obtenerListaDeOrderItemsPorParams(this.filtro).subscribe(dato => {
+      this.orderitems = dato;  // Asignar el resultado a la variable orderitems
+      console.log(dato);  // Mostrar los datos en consola para depurar
     });
   }
 
