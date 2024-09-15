@@ -2,6 +2,6 @@ export class ResponseOrderItemsDTO {
     id:number;
     precio:number; 
     quantity: number;
-    nombrePedido:string;
+    idPedido: number;
     nombreProducto:string;
 }

@@ -16,9 +16,11 @@ export class OrderItemsComponent implements OnInit {
   constructor(private orderItemsService: OrderItemsService) { }
 
   ngOnInit(): void {
-    this.filtro = new RequestOrderItemsDTO();  // Inicializa el filtro
-    this.listarOrderItems();  // Llama al método al inicializar el componente
+    this.orderItemsService.ObtenerlistarOrderItems().subscribe((data) => {
+      this.orderitems = data;  // Asignar a la variable orderitems que usas en la tabla
+    });
   }
+  
   
 
   listarOrderItems(): void {
