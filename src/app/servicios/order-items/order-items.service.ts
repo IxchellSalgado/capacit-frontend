@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestOrderItemsDTO } from '../../models/order-items/request-order-items-dto';
 import { ResponseOrderItemsDTO } from '../../models/order-items/response-order-items-dto';
+import { OrderItems } from 'src/app/models/order-items/order-items';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,15 @@ export class OrderItemsService {
   ObtenerOrderItemsPorId(id:Number):Observable<ResponseOrderItemsDTO> {
     return this.httpClient.get<ResponseOrderItemsDTO>(`${this.baseURL}/buscarPorId/${id}`);
   } 
+
+  eliminarOrderItem(id:Number):Observable<Object>{
+    return this.httpClient.delete(`${this.baseURL}/${id}`);
+  }
+  registrarEmpleado(orderItem : OrderItems):Observable<Object>{
+    return this.httpClient.post(`${this.baseURL}`, orderItem);
+  }
+
+  actualizarEmpleado(id:number, orderItem : OrderItems) : Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}/${id}`, orderItem);
+  }
 }

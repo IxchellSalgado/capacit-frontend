@@ -1,0 +1,29 @@
+<br>
+<h3>Lista de Detalles del Pedido</h3>
+<table class="table table.stripped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Pedido</th>
+        <th>Nombre del Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orderitem of orderItems">
+        <td>{{orderitem.id}}</td>
+        <td>{{orderitem.idPedido}}</td>
+        <td>{{orderitem.nombreProducto}}</td>
+        <td>${{orderitem.precio}}</td>
+        <td>{{orderitem.quantity}}</td>
+        <td>
+          <button (click)="actualizarOrderItems(orderitem.id)" class="btn btn-info">Actualizar</button>
+          <button (click)="eliminarOrderItems(orderitem.id)" class="btn btn-danger" style="margin-left: 10px">Eliminar</button>
+          <button (click)="verDetallesOrderItems(orderitem.id)" class="btn btn-primary" style="margin-left: 10px">Detalles</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

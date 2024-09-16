@@ -14,7 +14,10 @@ import { ActualizarClienteComponent } from './components/cliente/actualizar-clie
 import { ListarPedidosComponent } from './components/pedido/listar-pedidos/listar-pedidos.component';
 import { ListarCustomersComponent } from './components/customers/listar-customers/listar-customers.component';
 import { ProductoComponent } from './components/producto/producto/producto.component';
-import { OrderItemsComponent } from './components/order-items/order-items.component';
+import { DetalleOrderItemsComponent } from './components/order-items/detalle-order-items/detalle-order-items.component';
+import { ActualizarOrderItemsComponent } from './components/order-items/actualizar-order-items/actualizar-order-items.component';
+import { RegistrarOrderItemsComponent } from './components/order-items/registrar-order-items/registrar-order-items.component';
+import { ListarOrderItemsComponent } from './components/order-items/listar-order-items/listar-order-items.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { OrderItemsComponent } from './components/order-items/order-items.compon
     ListarPedidosComponent,
     ListarCustomersComponent,
     ProductoComponent,
-    OrderItemsComponent
+    DetalleOrderItemsComponent,
+    ActualizarOrderItemsComponent,
+    RegistrarOrderItemsComponent,
+    ListarOrderItemsComponent
   ],
   imports: [
     BrowserModule,
