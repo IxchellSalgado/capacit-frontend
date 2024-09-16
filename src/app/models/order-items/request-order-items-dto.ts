@@ -1,8 +1,12 @@
 export class RequestOrderItemsDTO {
     id:number;
-    pedidoNombre:string;
+    pedidoId:number;
     productoNombre:string;
     precio:number; 
     quantity: number;
 }
+
+
+
+
 

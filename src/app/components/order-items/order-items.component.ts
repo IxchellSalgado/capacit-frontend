@@ -9,7 +9,6 @@ import { ResponseOrderItemsDTO } from '../../models/order-items/response-order-i
   styleUrls: ['./order-items.component.css']
 })
 export class OrderItemsComponent implements OnInit {
-
   orderitems: ResponseOrderItemsDTO[] = []; 
   filtro: RequestOrderItemsDTO;
 
@@ -20,13 +19,9 @@ export class OrderItemsComponent implements OnInit {
       this.orderitems = data;  // Asignar a la variable orderitems que usas en la tabla
     });
   }
-  
-  
-
   listarOrderItems(): void {
     this.orderItemsService.obtenerListaDeOrderItemsPorParams(this.filtro).subscribe(dato => {
       this.orderitems = dato;  // Asignar el resultado a la variable orderitems
-      console.log(dato);  // Mostrar los datos en consola para depurar
     });
   }
 
