@@ -20,7 +20,7 @@ export class DetalleOrderItemsComponent implements OnInit {
     this.orderItemsServicio.ObtenerOrderItemsPorId(this.id).subscribe(dato => {
       this.orderItems = dato;
       // Puedes usar un alert o swal para mostrar los detalles si lo deseas
-      swal(`Detalles del Pedido de la orden ${this.orderItems.id}`);
+      swal(`Detalles de la orden del pedido:  ${this.orderItems.idPedido}`);
     });
   }
   

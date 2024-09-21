@@ -14,6 +14,10 @@ export class OrderItemsService {
 
   constructor(private httpClient: HttpClient) {  }
 
+  eliminarOrderItem(id:Number):Observable<Object>{
+    return this.httpClient.delete(`${this.baseURL}/${id}`);
+  }
+
   ObtenerlistarOrderItems():Observable<ResponseOrderItemsDTO[]> {
     return this.httpClient.get<ResponseOrderItemsDTO[]>(`${this.baseURL}`);
   }
@@ -23,18 +27,10 @@ export class OrderItemsService {
     return this.httpClient.post(`${this.baseURL}`, orderItem);
   }
 
-  //Este metodo sirve para obtener los detalles de los pedidos por parametros
-  obtenerListaDeOrderItemsPorParams(request: RequestOrderItemsDTO): Observable<ResponseOrderItemsDTO[]> {
-    return this.httpClient.post<ResponseOrderItemsDTO[]>(`${this.baseURL}/filtro`, request);
-  }
-
   ObtenerOrderItemsPorId(id: number): Observable<ResponseOrderItemsDTO> {
     return this.httpClient.get<ResponseOrderItemsDTO>(`${this.baseURL}/${id}`);
   }
-  
-  eliminarOrderItem(id:Number):Observable<Object>{
-    return this.httpClient.delete(`${this.baseURL}/${id}`);
-  }
+
   registrarOrderItem(orderItem : OrderItems):Observable<Object>{
     return this.httpClient.post(`${this.baseURL}`, orderItem);
   }
