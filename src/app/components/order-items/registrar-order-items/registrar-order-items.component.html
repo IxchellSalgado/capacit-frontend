@@ -17,7 +17,9 @@
         <!-- Dropdown para seleccionar Producto -->
         <div class="form-group">
             <label>Producto: </label>
-            <select class="form-control" [(ngModel)]="orderItems.productoId" name="productoId" required #productoId="ngModel">
+            <select class="form-control" [(ngModel)]="orderItems.productoId" 
+            (change)="onProductoSeleccionado(orderItems.productoId); logSeleccion(orderItems.productoId)" 
+            name="productoId" required #productoId="ngModel">
                 <option value="" disabled selected>Seleccione un producto</option>
                 <option *ngFor="let producto of productos" [value]="producto.id">{{producto.nombre}}</option>
             </select>
@@ -26,10 +28,11 @@
             </div>
         </div>
 
-        <!-- Campo para el precio -->
+
+        <!-- Campo para el precio (deshabilitado) -->
         <div class="form-group">
             <label>Precio: </label>
-            <input type="number" class="form-control" [(ngModel)]="orderItems.precio" name="precio" required #precio="ngModel" placeholder="Digite el precio del producto">
+            <input type="number" class="form-control" [(ngModel)]="orderItems.precio" name="precio" required #precio="ngModel" disabled>
             <div *ngIf="precio.invalid && (precio.dirty || precio.touched)">
                 <div class="alert alert-danger" *ngIf="precio.errors?.required">Ingrese el precio.</div>
             </div>
