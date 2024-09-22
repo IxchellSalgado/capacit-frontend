@@ -1,1 +1,49 @@
-<p>registrar-order-items works!</p>
+<div class="col-md-6 offset-md-3">
+    <h3 class="text-center">Registro de Order Items</h3>
+    <form (ngSubmit)="onSubmit()" #orderItemsForm="ngForm">
+
+        <!-- Dropdown para seleccionar Pedido -->
+        <div class="form-group">
+            <label>Pedido: </label>
+            <select class="form-control" [(ngModel)]="orderItems.pedidoId" name="pedidoId" required #pedidoId="ngModel">
+                <option value="" disabled selected>Seleccione un pedido</option>
+                <option *ngFor="let pedido of pedidos" [value]="pedido.id">{{pedido.id}}</option>
+            </select>
+            <div *ngIf="pedidoId.invalid && (pedidoId.dirty || pedidoId.touched)">
+                <div class="alert alert-danger" *ngIf="pedidoId.errors?.required">Seleccione un pedido.</div>
+            </div>
+        </div>
+
+        <!-- Dropdown para seleccionar Producto -->
+        <div class="form-group">
+            <label>Producto: </label>
+            <select class="form-control" [(ngModel)]="orderItems.productoId" name="productoId" required #productoId="ngModel">
+                <option value="" disabled selected>Seleccione un producto</option>
+                <option *ngFor="let producto of productos" [value]="producto.id">{{producto.nombre}}</option>
+            </select>
+            <div *ngIf="productoId.invalid && (productoId.dirty || productoId.touched)">
+                <div class="alert alert-danger" *ngIf="productoId.errors?.required">Seleccione un producto.</div>
+            </div>
+        </div>
+
+        <!-- Campo para el precio -->
+        <div class="form-group">
+            <label>Precio: </label>
+            <input type="number" class="form-control" [(ngModel)]="orderItems.precio" name="precio" required #precio="ngModel" placeholder="Digite el precio del producto">
+            <div *ngIf="precio.invalid && (precio.dirty || precio.touched)">
+                <div class="alert alert-danger" *ngIf="precio.errors?.required">Ingrese el precio.</div>
+            </div>
+        </div>
+
+        <!-- Campo para la cantidad -->
+        <div class="form-group">
+            <label>Cantidad: </label>
+            <input type="number" class="form-control" [(ngModel)]="orderItems.quantity" name="quantity" required #quantity="ngModel" placeholder="Digite la cantidad">
+            <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
+                <div class="alert alert-danger" *ngIf="quantity.errors?.required">Ingrese la cantidad.</div>
+            </div>
+        </div>
+
+        <button class="btn btn-success" [disabled]="!orderItemsForm.form.valid">Guardar</button>
+    </form>
+</div>

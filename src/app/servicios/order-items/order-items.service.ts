@@ -38,4 +38,14 @@ export class OrderItemsService {
   actualizarOrderItem(id:number, orderItem : OrderItems) : Observable<Object> {
     return this.httpClient.put(`${this.baseURL}/${id}`, orderItem);
   }
+  
+   // Método para obtener la lista de pedidos
+   getPedidos(): Observable<any[]> {
+    return this.httpClient.get<any[]>('http://localhost:8080/api/v1/pedidos');
+  }
+
+  // Método para obtener la lista de productos
+  getProductos(): Observable<any[]> {
+    return this.httpClient.get<any[]>('http://localhost:8080/api/v1/productos');
+  }
 }
