@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestOrderItemsDTO } from '../../models/order-items/request-order-items-dto';
 import { ResponseOrderItemsDTO } from '../../models/order-items/response-order-items-dto';
 import { OrderItems } from 'src/app/models/order-items/order-items';
-
+import { Page } from 'src/app/models/order-items/page'
 @Injectable({
   providedIn: 'root'
 })
@@ -47,5 +47,12 @@ export class OrderItemsService {
   // Método para obtener la lista de productos
   getProductos(): Observable<any[]> {
     return this.httpClient.get<any[]>('http://localhost:8080/api/v1/productos');
+  }
+
+  getOrderItemsPaged(page: number, size: number): Observable<Page<ResponseOrderItemsDTO>> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.httpClient.get<Page<ResponseOrderItemsDTO>>(`${this.baseURL}/paged`, { params });
   }
 }

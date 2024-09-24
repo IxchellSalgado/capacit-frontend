@@ -13,16 +13,28 @@ import swal from 'sweetalert2';
 export class ListarOrderItemsComponent implements OnInit {
   orderItems: ResponseOrderItemsDTO[] = [];
   request: RequestOrderItemsDTO;
+  totalPages: number = 0;
+  page: number = 0;
+  size: number = 7; 
 
   constructor(private orderItemsService: OrderItemsService, private router : Router) { }
 
   ngOnInit(): void {
-    this.orderItemsService.ObtenerlistarOrderItems().subscribe((data) => {
-      this.orderItems = data;  // Asignar a la variable orderitems que usas en la tabla
+    this.loadOrderItems(this.page, this.size);
+  }
+  
+  loadOrderItems(page: number, size: number): void {
+    this.orderItemsService.getOrderItemsPaged(page, size).subscribe(response => {
+      this.orderItems = response.content;
+      this.totalPages = response.totalPages;
     });
   }
-  actualizarOrderItems(id:number) {
-    this.router.navigate(['actualizar-OrderItems',id]);
+
+  onPageChange(newPage: number): void {
+    if (newPage >= 0 && newPage < this.totalPages) {
+      this.page = newPage; // Actualiza la página actual
+      this.loadOrderItems(this.page, this.size); // Carga los items de la nueva página
+    }
   }
 
   eliminarOrderItems(id: number) {
@@ -42,10 +54,11 @@ export class ListarOrderItemsComponent implements OnInit {
       if (result.value) {
         this.orderItemsService.eliminarOrderItem(id).subscribe(dato => {
           console.log(dato);
-          // Volver a obtener la lista después de eliminar
-          this.orderItemsService.ObtenerlistarOrderItems().subscribe((data) => {
-            this.orderItems = data;  // Actualizar la lista
-          });
+          // Volver a obtener la lista después de eliminar, usando paginación
+        this.orderItemsService.getOrderItemsPaged(this.page, this.size).subscribe((data) => {
+          this.orderItems = data.content;  // Actualizar la lista
+          this.page = data.number; // Actualizar la página actual si es necesario
+        });
           swal(
             'Detalle del Pedido eliminado',
             'El Detalle del Pedido ha sido eliminado con éxito',
@@ -57,7 +70,6 @@ export class ListarOrderItemsComponent implements OnInit {
   }
 
   verDetallesOrderItems(id:number) {
-    this.router.navigate(['detalle-OrderItems',id]);
+    this.router.navigate(['detalle-OrderItems', id]);
   }
-
 }

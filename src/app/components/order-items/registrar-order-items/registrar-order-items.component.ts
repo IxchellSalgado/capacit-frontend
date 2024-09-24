@@ -27,10 +27,8 @@ export class RegistrarOrderItemsComponent implements OnInit {
       this.pedidos = data;
       console.log('Pedidos:', this.pedidos); 
     });
-
     //console.log('Precio asignado:', this.orderItems.precio)
   }
-
   onProductoSeleccionado(productoId: number): void {
     console.log('Producto seleccionado:', productoId);
     const productoSeleccionado = this.productos.find(producto => producto.id === +productoId);
@@ -41,25 +39,19 @@ export class RegistrarOrderItemsComponent implements OnInit {
       console.log('Producto no encontrado');
     }
   }
-  
   logSeleccion(productoId: number): void {
     console.log('Producto seleccionado:', productoId);
   }
-  
-
+  onSubmit() {
+    this.guardarOrderItems();
+  }
   guardarOrderItems() {
     this.orderItemsService.registrarOrderItem(this.orderItems).subscribe(dato => {
       console.log(dato);    
       this.irALaListaDeOrderItems();
   }, error => console.log(error));
   }
-
   irALaListaDeOrderItems() {
     this.router.navigate(['/OrderItems']);
   }
- 
-  onSubmit() {
-    this.guardarOrderItems();
-  }
-
 }

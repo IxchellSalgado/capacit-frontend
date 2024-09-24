@@ -5,7 +5,8 @@
         <!-- Dropdown para seleccionar Pedido -->
         <div class="form-group">
             <label>Pedido: </label>
-            <select class="form-control" [(ngModel)]="orderItems.pedidoId" name="pedidoId" required #pedidoId="ngModel">
+            <select class="form-control" [(ngModel)]="orderItems.pedidoId" 
+            name="pedidoId" required #pedidoId="ngModel">
                 <option value="" disabled selected>Seleccione un pedido</option>
                 <option *ngFor="let pedido of pedidos" [value]="pedido.id">{{pedido.id}}</option>
             </select>
